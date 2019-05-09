@@ -41,7 +41,7 @@ class Camera_Multiplexer:
 
         #rospy.loginfo(camera)
         self.pub.publish(camera)
-        #self.rate.sleep()
+        self.rate.sleep()
 
     def camera_multiplexer(self):
         if self.cam1_hasdata:
@@ -63,12 +63,12 @@ class Camera_Multiplexer:
             #print self.camera_3.header
             self.cam3_hasdata = False
 
-        rospy.sleep(0.01)
+        '''rospy.sleep(0.01)
 
         if self.cam4_hasdata:
             self.publisher(self.camera_4)
             #print self.camera_4.header
-            self.cam4_hasdata = False
+            self.cam4_hasdata = False'''
 
         rospy.sleep(0.01)
 
@@ -97,12 +97,12 @@ class Camera_Multiplexer:
         rospy.Subscriber('/camera_1/image_raw',Image,self.callback_1)
         rospy.Subscriber('/camera_2/image_raw',Image,self.callback_2)
         rospy.Subscriber('/camera_3/image_raw',Image,self.callback_3)
-        rospy.Subscriber('/camera_4/image_raw',Image,self.callback_4) 
+        #rospy.Subscriber('/camera_4/image_raw',Image,self.callback_4) 
         rospy.Subscriber('/camera_5/image_raw',Image,self.callback_5)
 
         self.pub = rospy.Publisher('camera_multiplex', Image , queue_size=10)
 
-        #self.rate = rospy.Rate(10)
+        self.rate = rospy.Rate(5)
 
 
 
